@@ -9,7 +9,30 @@ $(document).ready(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
+  let hours = new Array(18);
+  let amPM = "AM";
+  var container = $('.container-fluid');
+  var timeNumber = 9;
+
+  for (x = 9; x < hours.length; x++) {
+    if (x >= 12) {
+        amPM = "PM"
+    }
+    if (x === 13) {
+      timeNumber = 1;
+    }
+    container.append(`<div id="hour-${x}" class="row time-block">
+                        <div class="col-2 col-md-1 hour text-center py-3">${timeNumber}${amPM}</div>
+                        <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+                        <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+                          <i class="fas fa-save" aria-hidden="true"></i>
+                        </button>
+                      </div>`);
+                      timeNumber++;
+  }
+
   /* add a click listener event to get input from the user in the text area by looking amongst the siblings of saveBtn for 'textarea' and then taking the val of that.  Also Get the id based on the hour of the time-block that is a parent to the save button for that hour. Lastly get the input and put it in local storage using the hour id as the key. Also added a pop-up that informs that the input has been saved then goes away after 2 seconds*/
+  
   var saved = document.getElementById('save-text');
   saved.style.visibility = "hidden";
 
@@ -51,5 +74,6 @@ $(document).ready(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
   var currentDate = dayjs().format('dddd, MMMM DD YYYY');
-  $('#currentDay').text(currentDate);     
+  $('#currentDay').text(currentDate);
+  
 });
