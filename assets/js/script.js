@@ -9,12 +9,18 @@ $(document).ready(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
 
-  /* add a click listener event to get input from the user in the text area by looking amongst the siblings of saveBtn for 'textarea' and then taking the val of that.  Also Get the id based on the hour of the time-block that is a parent to the save button for that hour. Lastly get the input and put it in local storage using the hour id as the key. */
+  /* add a click listener event to get input from the user in the text area by looking amongst the siblings of saveBtn for 'textarea' and then taking the val of that.  Also Get the id based on the hour of the time-block that is a parent to the save button for that hour. Lastly get the input and put it in local storage using the hour id as the key. Also added a pop-up that informs that the input has been saved then goes away after 2 seconds*/
+  var saved = document.getElementById('save-text');
+  saved.style.visibility = "hidden";
+
   $('.saveBtn').click(function() {
     var inputText = $(this).siblings('textarea').val();
     var block = $(this).parent().attr('id');
 
     localStorage.setItem(block, inputText);
+    saved.style.visibility = "visible";
+    setTimeout(() => saved.style.visibility = "hidden", 2000)
+    
   });
 
   
